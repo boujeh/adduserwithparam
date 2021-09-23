@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+  stages {
+
+    stage('usernamePassword') {
+      steps {
+        script {
+          withCredentials([
+            usernamePassword(credentialsId: '97544c2b-13ee-4922-83a3-9aa48c5f54dc',
+              usernameVariable: 'username',
+              passwordVariable: 'password')
+          ]) {
+            print 'username=' + username + 'password=' + password
+
+            print 'username.collect { it }=' + username.collect { it }
+            print 'password.collect { it }=' + password.collect { it }
+          }
+        }
+      }
+    }
+}
